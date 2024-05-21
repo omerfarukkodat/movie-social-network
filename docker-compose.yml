@@ -1,0 +1,32 @@
+services:
+  postgres:
+    container_name: postgres-sql-msn
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 2334
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: movie_social_network
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - 5433:5432
+    networks:
+      - spring-demo
+    restart: unless-stopped
+  mail-dev:
+    container_name: mail-dev-msn
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+
+
+
+volumes:
+  postgres:
+    driver: local
+
+networks:
+  spring-demo:
+    driver: bridge
