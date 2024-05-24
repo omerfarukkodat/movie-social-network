@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/movie_social_network
+    url: jdbc:postgresql://localhost:5433/movie_social_network
     username: postgres
     password: 2334
     driver-class-name: org.postgresql.Driver
