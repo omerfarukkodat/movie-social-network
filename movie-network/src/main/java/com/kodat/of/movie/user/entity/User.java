@@ -1,6 +1,6 @@
-package com.kodat.of.movie.user;
+package com.kodat.of.movie.user.entity;
 
-import com.kodat.of.movie.role.Role;
+import com.kodat.of.movie.user.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
+
 @Builder
 @Entity
 @AllArgsConstructor
@@ -24,7 +25,7 @@ import java.util.List;
 @Setter
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "users")
-public class User {
+public class User implements UserDetails , Principal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -46,9 +47,47 @@ public class User {
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
 
+    @Override
+    public String getPassword() {
+        return password;
+    }
 
-    private String fullName() {
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !accountLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    @Override
+    public String getName() {
+        return email;
+    }
+
+    public String fullName() {
         return firstname + " " + lastname;
     }
 
