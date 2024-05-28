@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Principal;
 import java.util.Collection;
-import java.util.List;
 
 
 public class CustomUserDetails implements UserDetails , Principal {
@@ -19,7 +18,10 @@ public class CustomUserDetails implements UserDetails , Principal {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(user.getRole().name()));
+        return user.getRoles()
+                .stream()
+                .map(r -> new SimpleGrantedAuthority(r.getName()))
+                .toList();
     }
 
     @Override
@@ -56,6 +58,8 @@ public class CustomUserDetails implements UserDetails , Principal {
     public String getName() {
         return user.getEmail();
     }
+
+
 
 
 

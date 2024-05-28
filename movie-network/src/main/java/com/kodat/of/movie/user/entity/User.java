@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @SuperBuilder
@@ -33,8 +34,8 @@ public class User {
     private LocalDate dateOfBirth;
     private boolean accountLocked;
     private boolean enabled;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles;
     @CreatedDate
     @Column(updatable = false, nullable = false)
     private LocalDateTime createdDate;

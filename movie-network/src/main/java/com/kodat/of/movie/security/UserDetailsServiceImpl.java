@@ -1,6 +1,7 @@
 package com.kodat.of.movie.security;
 
 import com.kodat.of.movie.user.UserRepository;
+import com.kodat.of.movie.user.entity.CustomUserDetails;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,8 +21,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-        return  userRepository.findByUserEmail(userEmail)
+        var user =  userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        return new CustomUserDetails(user);
 
 
 
