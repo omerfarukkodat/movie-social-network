@@ -31,7 +31,6 @@ public class AuthenticationService {
     public AuthenticationService(RoleRepository roleRepository, PasswordEncoder passwordEncoder, UserRepository userRepository, TokenRepository tokenRepository, EmailService emailService) {
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
-
         this.userRepository = userRepository;
         this.tokenRepository = tokenRepository;
         this.emailService = emailService;
