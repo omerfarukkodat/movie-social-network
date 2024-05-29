@@ -1,6 +1,7 @@
 package com.kodat.of.movie.user.entity;
 
 import com.kodat.of.movie.user.role.Role;
+import com.kodat.of.movie.user.token.Token;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -11,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 
 @SuperBuilder
@@ -42,8 +44,8 @@ public class User {
     @LastModifiedDate
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
-
-
+//@OneToMany(mappedBy = "user" , cascade = CascadeType.ALL , orphanRemoval = true)
+//    private Set<Token> tokens;
 
     public String fullName() {
         return firstname + " " + lastname;

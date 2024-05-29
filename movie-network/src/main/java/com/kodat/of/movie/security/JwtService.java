@@ -33,22 +33,11 @@ public class JwtService {
     return claimsResolver.apply(claims);
 
     }
-
-    private Claims extractAllClaims(String token) {
-        return Jwts
-                .parserBuilder()
-                .setSigningKey(getSignInKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-    }
-
-
     public String generateToken(UserDetails userDetails ) {
         return generateToken(new HashMap<>() , userDetails);
     }
 
-    private String generateToken(HashMap<String, Object> claims , UserDetails userDetails) {
+    public String generateToken(HashMap<String, Object> claims , UserDetails userDetails) {
         return buildToken(claims , userDetails , jwtExpiration);
     }
 
@@ -83,6 +72,14 @@ public class JwtService {
 
     private Date extractExpiration(String token) {
         return extractClaim(token , Claims::getExpiration);
+    }
+    private Claims extractAllClaims(String token) {
+        return Jwts
+                .parserBuilder()
+                .setSigningKey(getSignInKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
 
