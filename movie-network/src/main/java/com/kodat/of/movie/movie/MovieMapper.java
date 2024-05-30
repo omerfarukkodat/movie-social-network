@@ -1,5 +1,6 @@
 package com.kodat.of.movie.movie;
 
+import com.kodat.of.movie.history.MovieTransactionHistory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,6 +27,17 @@ public class MovieMapper {
                 .archived(movie.isArchived())
                 .shareable(movie.isShareable())
                 .owner(movie.getOwner().fullName())
+                .build();
+    }
+
+    public BorrowedMovieResponse toBorrowedMovieResponse(MovieTransactionHistory history) {
+        return BorrowedMovieResponse.builder()
+                .id(history.getMovie().getId())
+                .title(history.getMovie().getTitle())
+                .directorName(history.getMovie().getDirectorName())
+                .rate(history.getMovie().getRate())
+                .returned(history.isReturned())
+                .returned(history.isReturnApproved())
                 .build();
     }
 }
