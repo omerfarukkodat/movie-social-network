@@ -104,5 +104,14 @@ public class MovieController {
         return ResponseEntity.ok(service.returnBorrowedMovie(movieId,connectedUser));
     }
 
+    @PatchMapping("/borrow/return/approve/{movie-id}")
+    public ResponseEntity<Integer> approveReturnBorrowedMovie(
+            @PathVariable("movie-id") Integer movieId,
+            Authentication connectedUser
+    ){
+        return ResponseEntity.ok(service.approveReturnBorrowedMovie(movieId,connectedUser));
+    }
+
+
 
 }

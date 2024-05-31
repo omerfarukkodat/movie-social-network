@@ -54,7 +54,7 @@ public class MovieService {
         CustomUserDetails userDetails = (CustomUserDetails) connectedUser.getPrincipal();
         User user = userDetails.getUser();
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
-        Page<Movie> movies = movieRepository.findAllDisplayableBooks(pageable, user.getId());
+        Page<Movie> movies = movieRepository.findAllDisplayableMovies(pageable, user.getId());
         List<MovieResponse> movieResponse = movies.stream()
                 .map(movieMapper::toMovieResponse)
                 .toList();
@@ -73,12 +73,14 @@ public class MovieService {
     public PageResponse<MovieResponse> findAllMoviesByOwner(int page, int size, Authentication connectedUser) {
         CustomUserDetails userDetails = (CustomUserDetails) connectedUser.getPrincipal();
         User user = userDetails.getUser();
+
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
         Page<Movie> movies = movieRepository.findAll(MovieSpecification.withOwnerId(user.getId()) , pageable);
 
         List<MovieResponse> movieResponse = movies.stream()
                 .map(movieMapper::toMovieResponse)
                 .toList();
+
         return new PageResponse<>(
                 movieResponse,
                 movies.getNumber(),
@@ -205,5 +207,26 @@ public class MovieService {
                 .orElseThrow(() -> new OperationNotPermittedException("You did not borrowed this movie "));
         movieTransactionHistory.setReturned(true);
         return movieTransactionHistoryRepository.save(movieTransactionHistory).getId();
+    }
+
+    public Integer approveReturnBorrowedMovie(Integer movieId, Authentication connectedUser) {
+
+        Movie movie = movieRepository.findById(movieId)
+                .orElseThrow(() -> new EntityNotFoundException("Movie not found with id: " + movieId));
+        if (movie.isArchived() || !movie.isShareable()){
+            throw new OperationNotPermittedException("You cannot borrow movie because  movie is not shareable");
+        }
+
+        CustomUserDetails userDetails = (CustomUserDetails) connectedUser.getPrincipal();
+        User user = userDetails.getUser();
+
+        if (!Objects.equals(movie.getOwner().getId(), user.getId())) {
+            throw new OperationNotPermittedException("You cannot borrow or return your own movie ");
+        }
+        MovieTransactionHistory movieTransactionHistory = movieTransactionHistoryRepository.findByMovieIdAndOwnerId(movieId , user.getId())
+                .orElseThrow(() -> new OperationNotPermittedException("The movie is not returned yet.You cannot approve its return "));
+        movieTransactionHistory.setReturnApproved(true);
+        return movieTransactionHistoryRepository.save(movieTransactionHistory).getId();
+
     }
 }

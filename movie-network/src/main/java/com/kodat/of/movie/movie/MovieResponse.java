@@ -14,7 +14,7 @@ public class MovieResponse {
     private String directorName;
     private String synopsis;
     private String owner;
-    private byte[] cover;
+    private byte[] movieCover;
     private double rate;
     private boolean archived;
     private boolean shareable;

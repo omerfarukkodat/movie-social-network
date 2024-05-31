@@ -15,5 +15,5 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> , JpaSpec
             AND movie.shareable = true
             AND movie.owner.id != :userId
             """)
-    Page<Movie> findAllDisplayableBooks(Pageable pageable, Integer userId);
+    Page<Movie> findAllDisplayableMovies(Pageable pageable, Integer userId);
 }

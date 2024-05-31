@@ -45,4 +45,16 @@ public interface MovieTransactionHistoryRepository extends JpaRepository<MovieTr
             AND transaction.returnApproved = false
             """)
     Optional<MovieTransactionHistory> findByMovieIdAndUserId(Integer movieId, Integer userId);
+
+
+
+    @Query("""
+            select transaction
+            FROM MovieTransactionHistory transaction
+            WHERE transaction.movie.owner.id = :userId
+            AND transaction.movie.id = :movieId
+            AND transaction.returned = true
+            AND transaction.returnApproved = false
+            """)
+    Optional<MovieTransactionHistory> findByMovieIdAndOwnerId(Integer movieId, Integer userId);
 }
