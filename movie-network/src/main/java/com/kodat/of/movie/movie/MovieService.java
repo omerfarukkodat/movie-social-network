@@ -2,6 +2,7 @@ package com.kodat.of.movie.movie;
 
 import com.kodat.of.movie.common.PageResponse;
 import com.kodat.of.movie.exception.OperationNotPermittedException;
+import com.kodat.of.movie.file.FileStorageService;
 import com.kodat.of.movie.history.MovieTransactionHistory;
 import com.kodat.of.movie.history.MovieTransactionHistoryRepository;
 import com.kodat.of.movie.user.entity.CustomUserDetails;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Objects;
@@ -23,11 +25,13 @@ public class MovieService {
     private final MovieMapper movieMapper;
     private final MovieRepository movieRepository;
     private final MovieTransactionHistoryRepository movieTransactionHistoryRepository;
+    private final FileStorageService fileStorageService;
 
-    public MovieService(MovieMapper movieMapper, MovieRepository movieRepository, MovieTransactionHistoryRepository movieTransactionHistoryRepository) {
+    public MovieService(MovieMapper movieMapper, MovieRepository movieRepository, MovieTransactionHistoryRepository movieTransactionHistoryRepository, FileStorageService fileStorageService) {
         this.movieMapper = movieMapper;
         this.movieRepository = movieRepository;
         this.movieTransactionHistoryRepository = movieTransactionHistoryRepository;
+        this.fileStorageService = fileStorageService;
     }
 
 
@@ -227,6 +231,18 @@ public class MovieService {
                 .orElseThrow(() -> new OperationNotPermittedException("The movie is not returned yet.You cannot approve its return "));
         movieTransactionHistory.setReturnApproved(true);
         return movieTransactionHistoryRepository.save(movieTransactionHistory).getId();
+
+    }
+
+    public void uploadMovieCoverPicture(MultipartFile file, Authentication connectedUser, Integer movieId) {
+        Movie movie = movieRepository.findById(movieId)
+                .orElseThrow(() -> new EntityNotFoundException("Movie not found with id: " + movieId));
+        CustomUserDetails userDetails = (CustomUserDetails) connectedUser.getPrincipal();
+        User user = userDetails.getUser();
+        var movieCover = fileStorageService.saveFile(file,user.getId());
+        movie.setMovieCover(movieCover);
+        movieRepository.save(movie);
+
 
     }
 }

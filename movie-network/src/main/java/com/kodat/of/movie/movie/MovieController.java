@@ -1,11 +1,13 @@
 package com.kodat.of.movie.movie;
 
 import com.kodat.of.movie.common.PageResponse;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
@@ -110,6 +112,17 @@ public class MovieController {
             Authentication connectedUser
     ){
         return ResponseEntity.ok(service.approveReturnBorrowedMovie(movieId,connectedUser));
+    }
+
+    @PostMapping(value = "/cover/{movie-id}" , consumes = "multipart/form-data")
+    public ResponseEntity<?> uploadMovieCoverPicture(
+            @PathVariable("movie-id") Integer movieId,
+            @Parameter()
+            @RequestPart("file") MultipartFile file,
+            Authentication connectedUser
+    ){
+        service.uploadMovieCoverPicture(file,connectedUser,movieId);
+        return ResponseEntity.accepted().build();
     }
 
 
