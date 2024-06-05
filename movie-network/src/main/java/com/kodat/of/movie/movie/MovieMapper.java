@@ -1,5 +1,6 @@
 package com.kodat.of.movie.movie;
 
+import com.kodat.of.movie.file.FileUtils;
 import com.kodat.of.movie.history.MovieTransactionHistory;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,7 @@ public class MovieMapper {
                 .archived(movie.isArchived())
                 .shareable(movie.isShareable())
                 .owner(movie.getOwner().fullName())
+                .movieCover(FileUtils.readFileFromLocation(movie.getMovieCover()))
                 .build();
     }
 
