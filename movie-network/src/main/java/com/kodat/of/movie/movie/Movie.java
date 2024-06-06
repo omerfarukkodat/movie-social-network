@@ -44,7 +44,7 @@ public class Movie extends BaseEntity {
             return 0.0;
         }
         var rate = this.feedbacks.stream()
-                .mapToDouble(Feedback::getRate)
+                .mapToDouble(Feedback::getNote)
                 .average()
                 .orElse(0.0);
 

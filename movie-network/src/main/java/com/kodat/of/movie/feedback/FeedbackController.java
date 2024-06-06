@@ -36,8 +36,8 @@ public class FeedbackController {
             int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size,
             Authentication connectedUser) {
-        return ResponseEntity.ok(feedbackService.findAllFeedBacksByMovie(movieId,page,size,connectedUser);
-
+        return ResponseEntity.ok(feedbackService.findAllFeedBacksByMovie(movieId,page,size,connectedUser));
     }
+
 
 }

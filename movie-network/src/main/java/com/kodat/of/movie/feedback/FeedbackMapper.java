@@ -1,9 +1,11 @@
 package com.kodat.of.movie.feedback;
 
 import com.kodat.of.movie.movie.Movie;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+@Service
 public class FeedbackMapper {
 
     public Feedback toFeedback(FeedbackRequest request){
