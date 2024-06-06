@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { MovieService } from './services/movie.service';
@@ -16,7 +16,6 @@ import { AuthenticationService } from './services/authentication.service';
   exports: [],
   declarations: [],
   providers: [
-    HttpClient,
     MovieService,
     FeedbackService,
     AuthenticationService,
@@ -36,7 +35,7 @@ export class ApiModule {
     }
   }
 
-  constructor(
+  constructor( 
     @Optional() @SkipSelf() parentModule: ApiModule,
     @Optional() http: HttpClient
   ) {
