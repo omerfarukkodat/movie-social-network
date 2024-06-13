@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {AuthenticationRequest} from "../../services/models/authentication-request";
+import {Router} from "@angular/router";
+import {AuthenticationService} from "../../services/services/authentication.service";
+import {AuthenticationResponse} from "../../services/models/authentication-response";
 
 @Component({
   selector: 'app-login',
@@ -11,11 +14,34 @@ export class LoginComponent {
   authRequest : AuthenticationRequest = {email: '', password: ''};
   errorMessage: Array<String> = [];
 
-  login() {
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService
+  ) {
+  }
 
+  login() {
+    this.errorMessage = [];
+    this.authService.authenticate(
+      {
+        body: this.authRequest
+      }
+    ).subscribe({
+      next: (res: AuthenticationResponse) => {
+        this.router.navigate(['movies']);
+    },
+      error: (err) => {
+        console.log(err);
+        if (err.error.validationErrors) {
+          this.errorMessage = err.error.validationErrors;
+        }else {
+          this.errorMessage.push(err.error.error);
+        }
+      }
+    });
   }
 
   register() {
-
+  this.router.navigate(['api/v1/auth/register'])
   }
 }
