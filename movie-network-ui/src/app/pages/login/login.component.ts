@@ -45,6 +45,6 @@ export class LoginComponent {
   }
 
   register() {
-  this.router.navigate(['api/v1/auth/register'])
+  this.router.navigate(['register'])
   }
 }
