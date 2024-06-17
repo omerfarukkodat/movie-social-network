@@ -16,6 +16,10 @@ const routes: Routes = [
   {
     path: 'activate-account',
     component: ActivateAccountComponent
+  },
+  {
+    path: 'movies',
+    loadChildren: () => import('./modules/movie/movie.module').then(m => m.MovieModule)
   }
   ];
 
