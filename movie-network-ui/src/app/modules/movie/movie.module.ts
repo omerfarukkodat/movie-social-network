@@ -5,13 +5,15 @@ import { MovieRoutingModule } from './movie-routing.module';
 import {MainComponent} from "./pages/main/main.component";
 import { MenuComponent } from './components/menu/menu.component';
 import { MovieListComponent } from './pages/movie-list/movie-list.component';
+import { MovieCardComponent } from './components/movie-card/movie-card.component';
 
 
 @NgModule({
   declarations: [
     MainComponent,
     MenuComponent,
-    MovieListComponent
+    MovieListComponent,
+    MovieCardComponent
   ],
   imports: [
     CommonModule,

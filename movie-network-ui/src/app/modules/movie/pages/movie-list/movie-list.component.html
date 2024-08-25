@@ -1,5 +1,5 @@
 <h3>Book List</h3>
 <hr>
 <div class="d-flex justify-content-start gap-2 flex-wrap">
-<span *ngFor="let movie of movieResponse.content">{{movie.title}}</span>
+<app-movie-card [movie]="movie" *ngFor="let movie of movieResponse.content"></app-movie-card>
 </div>
