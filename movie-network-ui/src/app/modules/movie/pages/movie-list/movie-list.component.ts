@@ -10,8 +10,9 @@ import {PageResponseMovieResponse} from "../../../../services/models/page-respon
 })
 export class MovieListComponent implements OnInit{
   movieResponse: PageResponseMovieResponse = {};
-   size = 5;
+   size = 1;
    page = 0;
+
 
   constructor(
     private movieService: MovieService,
@@ -37,4 +38,33 @@ export class MovieListComponent implements OnInit{
       });
  }
 
+  goToFirstPage() {
+    this.page = 0;
+    this.findAllMovies();
+
+  }
+
+  goToPreviousPage() {
+    this.page --;
+    this.findAllMovies();
+  }
+
+  goToPage(page: number) {
+    this.page = page;
+    this.findAllMovies();
+  }
+
+  goToLastPage() {
+    this.page = this.movieResponse.totalPages as number -1;
+    this.findAllMovies();
+  }
+
+  goToNextPage() {
+    this.page++;
+    this.findAllMovies();
+  }
+
+  get isLastPAge(): boolean {
+    return this.page == this.movieResponse.totalPages as number -1;
+  }
 }
