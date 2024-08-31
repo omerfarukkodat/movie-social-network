@@ -10,16 +10,19 @@ import { RatingComponent } from './components/rating/rating.component';
 
 
 @NgModule({
-  declarations: [
-    MainComponent,
-    MenuComponent,
-    MovieListComponent,
-    MovieCardComponent,
-    RatingComponent
-  ],
-  imports: [
-    CommonModule,
-    MovieRoutingModule
-  ]
+    declarations: [
+        MainComponent,
+        MenuComponent,
+        MovieListComponent,
+        MovieCardComponent,
+        RatingComponent
+    ],
+    exports: [
+        MovieCardComponent
+    ],
+    imports: [
+        CommonModule,
+        MovieRoutingModule
+    ]
 })
 export class MovieModule { }

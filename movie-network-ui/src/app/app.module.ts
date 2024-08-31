@@ -11,21 +11,25 @@ import { ActivateAccountComponent } from './pages/activate-account/activate-acco
 import {CodeInputModule} from "angular-code-input";
 import {ApiModule} from "./services/api.module";
 import {HttpTokenInterceptor} from "./services/interceptor/http-token.interceptor";
+import { MyMoviesComponent } from './modules/movie/pages/my-movies/my-movies.component';
+import {MovieModule} from "./modules/movie/movie.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    ActivateAccountComponent
+    ActivateAccountComponent,
+    MyMoviesComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        CodeInputModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    CodeInputModule,
+    MovieModule
+  ],
   providers: [HttpClient,
     {
       provide: HTTP_INTERCEPTORS,
