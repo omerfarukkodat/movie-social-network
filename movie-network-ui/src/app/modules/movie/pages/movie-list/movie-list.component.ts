@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MovieService} from "../../../../services/services/movie.service";
 import {Router} from "@angular/router";
 import {PageResponseMovieResponse} from "../../../../services/models/page-response-movie-response";
+import {MovieResponse} from "../../../../services/models/movie-response";
 
 @Component({
   selector: 'app-movie-list',
@@ -10,8 +11,10 @@ import {PageResponseMovieResponse} from "../../../../services/models/page-respon
 })
 export class MovieListComponent implements OnInit{
   movieResponse: PageResponseMovieResponse = {};
-   size = 1;
+   size = 5;
    page = 0;
+   message:string = '';
+   level:string = 'success';
 
 
   constructor(
@@ -66,5 +69,25 @@ export class MovieListComponent implements OnInit{
 
   get isLastPAge(): boolean {
     return this.page == this.movieResponse.totalPages as number -1;
+  }
+
+  borrowMovie(movie: MovieResponse) {
+    this.message = '';
+    this.level = 'success';
+
+    this.movieService.borrowMovie({
+      'movie-id': movie.id as number
+    }).subscribe({
+      next: (): void => {
+        this.level = 'success';
+        this.message = 'Movie successfully added to your list';
+      },
+      error: (err): void => {
+        console.log(err);
+        this.level = 'error';
+        this.message = err.error.error;
+      }
+    });
+
   }
 }

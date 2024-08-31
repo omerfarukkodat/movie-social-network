@@ -1,9 +1,19 @@
 <h3>Book List</h3>
+<div
+  *ngIf="message"
+  class="alert"
+  [class.alert-danger]="level==='error'"
+  [class.alert-success]="level==='success'"
+  role="alert"
+>
+  <p>{{message}}</p>
+</div>
 <hr>
 <div class="d-flex justify-content-start gap-2 flex-wrap">
 <app-movie-card
   [movie]="movie"
   *ngFor="let movie of movieResponse.content"
+  (borrow)="borrowMovie($event)"
 ></app-movie-card>
 </div>
 
