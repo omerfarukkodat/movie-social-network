@@ -7,6 +7,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { MovieListComponent } from './pages/movie-list/movie-list.component';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { ManageMovieComponent } from './pages/manage-movie/manage-movie.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { RatingComponent } from './components/rating/rating.component';
         MenuComponent,
         MovieListComponent,
         MovieCardComponent,
-        RatingComponent
+        RatingComponent,
+        ManageMovieComponent
     ],
     exports: [
         MovieCardComponent
