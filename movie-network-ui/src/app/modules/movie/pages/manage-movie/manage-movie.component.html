@@ -6,7 +6,44 @@
   </div>
 <div class="d-flex gap-2">
   <div class="col-3">
-    <img class="rounded-1" width="100%" height="100%" [src]="selectedPicture" ||  ]>
+    <img class="rounded-1" width="100%" height="100%" [src]=" selectedPicture || 'https://picsum.photos/536/354'" alt="">
+    <div class="mt-2">
+      <input
+        (change)="onFileSelected($event)"
+      class="form-control"
+      type="file"
+      id="formFile"
+      accept="image/*"
+      >
+    </div>
+  </div>
+  <div class="col-9">
+    <form class="row g-3">
+      <div class="col-6">
+        <label for="title" class="form-label">Title</label>
+        <input [(ngModel)]="movieRequest.title" name="title" type="text" class="form-control" id="title" placeholder="Movie title">
+      </div>
+      <div class="col-6">
+        <label for="director" class="form-label">Director Name</label>
+        <input [(ngModel)]="movieRequest.directorName" name="director" type="text" class="form-control" id="director" placeholder="Director Name">
+      </div>
+      <div class="col-12">
+        <label for="synopsis" class="form-label">Synopsis</label>
+        <textarea [(ngModel)]="movieRequest.synopsis" name="synopsis" rows="5" class="form-control" id="synopsis" placeholder="Movie Synopsis"></textarea>
+      </div>
+      <div class="col-12">
+        <input [(ngModel)]="movieRequest.shareable" name="shareable" type="checkbox" class="form-check-input" id="shareme">
+        <label for="shareme" class="form-check-label">&nbsp;Share me</label>
+      </div>
+      <div class="d-flex justify-content-end gap-2 col-6">
+        <button (click)="saveMovie()" type="submit" class="btn btn-outline-primary">
+          <i class="fas fa-save"></i>&nbsp;Save
+        </button>
+        <a routerLink="/movies/my-movies" class="btn btn-link text-danger">
+          <i class="fas fa-times"></i>&nbsp;Cancel
+        </a>
+      </div>
+    </form>
   </div>
 </div>
 </div>

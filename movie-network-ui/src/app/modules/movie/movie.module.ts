@@ -8,6 +8,7 @@ import { MovieListComponent } from './pages/movie-list/movie-list.component';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { ManageMovieComponent } from './pages/manage-movie/manage-movie.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ManageMovieComponent } from './pages/manage-movie/manage-movie.componen
     ],
     imports: [
         CommonModule,
-        MovieRoutingModule
+        MovieRoutingModule,
+        FormsModule
     ]
 })
 export class MovieModule { }

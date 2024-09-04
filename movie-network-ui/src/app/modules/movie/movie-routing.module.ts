@@ -19,6 +19,10 @@ const routes: Routes = [
         component: MyMoviesComponent
       },
       {
+        path: 'manage',
+        component: ManageMovieComponent
+      },
+      {
         path: 'manage/:movieId',
         component: ManageMovieComponent
       }

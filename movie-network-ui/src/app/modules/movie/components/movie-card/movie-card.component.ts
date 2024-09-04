@@ -29,7 +29,7 @@ export class MovieCardComponent {
     if (this._movie.movieCover){
       return 'data:image/jpg;base64, ' + this._movie.movieCover;
     }
-    return this._movieCover;
+    return 'https://picsum.photos/536/354';
   }
 
   get manage(): boolean {
