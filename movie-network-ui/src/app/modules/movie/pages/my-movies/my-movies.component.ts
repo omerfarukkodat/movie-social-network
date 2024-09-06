@@ -79,7 +79,7 @@ export class MyMoviesComponent implements OnInit{
 
   }
 
-  editMovie(edit: MovieResponse) {
-
+  editMovie(movie: MovieResponse) {
+  this.router.navigate(['movies','manage',movie.id])
   }
 }

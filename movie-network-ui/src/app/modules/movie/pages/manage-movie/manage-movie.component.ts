@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MovieRequest} from "../../../../services/models/movie-request";
 import {MovieService} from "../../../../services/services/movie.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {MovieResponse} from "../../../../services/models/movie-response";
 
 @Component({
   selector: 'app-manage-movie',
   templateUrl: './manage-movie.component.html',
   styleUrls: ['./manage-movie.component.scss']
 })
-export class ManageMovieComponent {
+export class ManageMovieComponent implements OnInit{
 
   movieRequest: MovieRequest = {directorName: '' , synopsis: '' , title: ''}
   errorMsg: Array<string> = [];
@@ -17,7 +18,8 @@ export class ManageMovieComponent {
 
   constructor(
     private movieService: MovieService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
   }
 
@@ -54,5 +56,29 @@ export class ManageMovieComponent {
         this.errorMsg = err.error.validation
       }
     });
+  }
+
+  ngOnInit(): void {
+    const movieId = this.activatedRoute.snapshot.params['movieId'];
+    if (movieId){
+      this.movieService.findMovieById(
+        {
+          'movie-id': movieId
+        }
+      ).subscribe({
+        next: (movie: MovieResponse): void => {
+          this.movieRequest = {
+            id: movie.id,
+            title: movie.title as string,
+            directorName: movie.directorName as string,
+            synopsis: movie.synopsis as string,
+            shareable: movie.shareable
+          }
+          if (movie.movieCover){
+            this.selectedPicture = 'data:image/jpeg;base64,' + movie.movieCover;
+          }
+        }
+      });
+    }
   }
 }
