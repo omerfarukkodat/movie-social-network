@@ -72,7 +72,13 @@ export class MyMoviesComponent implements OnInit{
 
 
   archiveMovie(movie: MovieResponse) {
-
+  this.movieService.updateArchivedStatus({
+    'movie-id': movie.id as number
+  }).subscribe({
+    next: (): void => {
+      movie.archived = !movie.archived;
+    }
+  })
   }
 
   shareMovie(movie: MovieResponse) {
