@@ -4,6 +4,7 @@ import {MainComponent} from "./pages/main/main.component";
 import {MovieListComponent} from "./pages/movie-list/movie-list.component";
 import {MyMoviesComponent} from "./pages/my-movies/my-movies.component";
 import {ManageMovieComponent} from "./pages/manage-movie/manage-movie.component";
+import {BorrowedMoviesComponent} from "./pages/borrowed-movies/borrowed-movies.component";
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
       {
         path: 'manage/:movieId',
         component: ManageMovieComponent
+      },
+      {
+        path: 'my-borrowed-movies',
+        component: BorrowedMoviesComponent
       }
     ]
   }

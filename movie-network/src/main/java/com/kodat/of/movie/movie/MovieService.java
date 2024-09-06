@@ -178,7 +178,7 @@ public class MovieService {
         CustomUserDetails userDetails = (CustomUserDetails) connectedUser.getPrincipal();
         User user = userDetails.getUser();
 
-        if (!Objects.equals(movie.getOwner().getId(), user.getId())) {
+        if (Objects.equals(movie.getOwner().getId(), user.getId())) {
             throw new OperationNotPermittedException("You cannot borrow your own movie ");
         }
         final boolean isAlreadyBorrowed = movieTransactionHistoryRepository.isAlreadyBorrowedByUser(movieId,user.getId());
@@ -204,7 +204,7 @@ public class MovieService {
         CustomUserDetails userDetails = (CustomUserDetails) connectedUser.getPrincipal();
         User user = userDetails.getUser();
 
-        if (!Objects.equals(movie.getOwner().getId(), user.getId())) {
+        if (Objects.equals(movie.getOwner().getId(), user.getId())) {
             throw new OperationNotPermittedException("You cannot borrow or return your own movie ");
         }
         MovieTransactionHistory movieTransactionHistory = movieTransactionHistoryRepository.findByMovieIdAndUserId(movieId , user.getId())

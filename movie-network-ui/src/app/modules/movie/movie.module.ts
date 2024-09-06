@@ -9,6 +9,7 @@ import { MovieCardComponent } from './components/movie-card/movie-card.component
 import { RatingComponent } from './components/rating/rating.component';
 import { ManageMovieComponent } from './pages/manage-movie/manage-movie.component';
 import {FormsModule} from "@angular/forms";
+import { BorrowedMoviesComponent } from './pages/borrowed-movies/borrowed-movies.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {FormsModule} from "@angular/forms";
         MovieListComponent,
         MovieCardComponent,
         RatingComponent,
-        ManageMovieComponent
+        ManageMovieComponent,
+        BorrowedMoviesComponent
     ],
     exports: [
         MovieCardComponent
