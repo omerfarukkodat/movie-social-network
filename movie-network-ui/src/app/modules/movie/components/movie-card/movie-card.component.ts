@@ -14,7 +14,12 @@ export class MovieCardComponent {
   private _movieCover: string | undefined;
 
 
-
+  get movieCover(): string | undefined {
+    if (this._movie.movieCover){
+      return 'data:image/jpg;base64, ' + this._movie.movieCover;
+    }
+    return 'https://picsum.photos/536/354';
+  }
 
   get movie(): MovieResponse {
     return this._movie;
@@ -25,17 +30,10 @@ export class MovieCardComponent {
     this._movie = value;
   }
 
-  get movieCover(): string | undefined {
-    if (this._movie.movieCover){
-      return 'data:image/jpg;base64, ' + this._movie.movieCover;
-    }
-    return 'https://picsum.photos/536/354';
-  }
-
   get manage(): boolean {
     return this._manage;
   }
-@Input()
+  @Input()
   set manage(value: boolean) {
     this._manage = value;
   }

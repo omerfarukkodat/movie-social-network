@@ -47,7 +47,7 @@ export class ManageMovieComponent implements OnInit{
           }
         }).subscribe({
           next: () => {
-            this.router.navigate(['movies/my-movies']);
+            this.router.navigate(['/movies/my-movies']);
           }
         });
       },

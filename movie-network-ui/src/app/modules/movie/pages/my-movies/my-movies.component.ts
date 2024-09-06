@@ -71,12 +71,18 @@ export class MyMoviesComponent implements OnInit{
   }
 
 
-  archiveMovie(book: MovieResponse) {
+  archiveMovie(movie: MovieResponse) {
 
   }
 
-  shareMovie(share: MovieResponse) {
-
+  shareMovie(movie: MovieResponse) {
+  this.movieService.updateShareableStatus({
+    'movie-id': movie.id as number
+  }).subscribe({
+    next: (): void => {
+      movie.shareable = !movie.shareable;
+    }
+  });
   }
 
   editMovie(movie: MovieResponse) {
