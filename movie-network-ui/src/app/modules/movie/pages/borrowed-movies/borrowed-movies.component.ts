@@ -15,7 +15,7 @@ export class BorrowedMoviesComponent implements OnInit{
   feedbackRequest: FeedbackRequest = {comment: '', movieId: 0 ,note: 0};
   page:number = 0;
   size:number = 5;
-  borrowedMovies: PageResponseBorrowedMovieResponse = {};
+  borrowedMovies: PageResponseBorrowedMovieResponse = { content: [], totalPages: 0 };
   selectedMovie: BorrowedMovieResponse | undefined = undefined;
 
 
@@ -80,17 +80,20 @@ export class BorrowedMoviesComponent implements OnInit{
 
 
   returnMovie(withFeedback: boolean) {
-  this.movieService.returnBorrowedMovie({
-    'movie-id': this.selectedMovie?.id as number
-  }).subscribe({
-    next: (): void => {
-      if (withFeedback) {
-        this.giveFeedback();
+    this.movieService.returnBorrowedMovie({
+      'movie-id': this.selectedMovie?.id as number
+    }).subscribe({
+      next: (): void => {
+        if (withFeedback) {
+          this.giveFeedback();
+        }
+        this.selectedMovie = undefined;
+        this.findAllBorrowedMovies();
+      },
+      error: (err) => {
+        console.error('Error returning movie:', err);
       }
-      this.selectedMovie = undefined;
-      this.findAllBorrowedMovies();
-    }
-  })
+    });
   }
 
   private giveFeedback() {

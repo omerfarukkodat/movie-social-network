@@ -13,6 +13,7 @@ import {ApiModule} from "./services/api.module";
 import {HttpTokenInterceptor} from "./services/interceptor/http-token.interceptor";
 import { MyMoviesComponent } from './modules/movie/pages/my-movies/my-movies.component';
 import {MovieModule} from "./modules/movie/movie.module";
+import { ReturnedMoviesComponent } from './modules/movie/pages/returned-movies/returned-movies.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {MovieModule} from "./modules/movie/movie.module";
     LoginComponent,
     RegisterComponent,
     ActivateAccountComponent,
-    MyMoviesComponent
+    MyMoviesComponent,
+    ReturnedMoviesComponent
   ],
   imports: [
     BrowserModule,

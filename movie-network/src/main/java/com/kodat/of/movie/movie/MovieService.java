@@ -225,7 +225,7 @@ public class MovieService {
         User user = userDetails.getUser();
 
         if (!Objects.equals(movie.getOwner().getId(), user.getId())) {
-            throw new OperationNotPermittedException("You cannot borrow or return your own movie ");
+            throw new OperationNotPermittedException("You cannot return a book that you do not own movie ");
         }
         MovieTransactionHistory movieTransactionHistory = movieTransactionHistoryRepository.findByMovieIdAndOwnerId(movieId , user.getId())
                 .orElseThrow(() -> new OperationNotPermittedException("The movie is not returned yet.You cannot approve its return "));

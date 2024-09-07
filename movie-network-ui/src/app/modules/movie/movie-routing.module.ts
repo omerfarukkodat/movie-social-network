@@ -5,31 +5,50 @@ import {MovieListComponent} from "./pages/movie-list/movie-list.component";
 import {MyMoviesComponent} from "./pages/my-movies/my-movies.component";
 import {ManageMovieComponent} from "./pages/manage-movie/manage-movie.component";
 import {BorrowedMoviesComponent} from "./pages/borrowed-movies/borrowed-movies.component";
+import {ReturnedMoviesComponent} from "./pages/returned-movies/returned-movies.component";
+import {authGuard} from "../../services/guard/auth.guard";
 
 const routes: Routes = [
   {
     path: '',
     component: MainComponent,
+    canActivate: [authGuard],
     children:[
       {
         path: '',
-        component: MovieListComponent
+        component: MovieListComponent,
+        canActivate: [authGuard]
+
       },
       {
         path: 'my-movies',
-        component: MyMoviesComponent
+        component: MyMoviesComponent,
+        canActivate: [authGuard]
+
       },
       {
         path: 'manage',
-        component: ManageMovieComponent
+        component: ManageMovieComponent,
+        canActivate: [authGuard]
+
       },
       {
         path: 'manage/:movieId',
-        component: ManageMovieComponent
+        component: ManageMovieComponent,
+        canActivate: [authGuard]
+
       },
       {
         path: 'my-borrowed-movies',
-        component: BorrowedMoviesComponent
+        component: BorrowedMoviesComponent,
+        canActivate: [authGuard]
+
+      },
+      {
+        path: 'my-returned-movies',
+        component: ReturnedMoviesComponent,
+        canActivate: [authGuard]
+
       }
     ]
   }
