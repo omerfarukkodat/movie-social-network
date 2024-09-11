@@ -3,7 +3,7 @@ package com.kodat.of.movie.auth;
 import com.kodat.of.movie.email.EmailService;
 import com.kodat.of.movie.email.EmailTemplateName;
 import com.kodat.of.movie.security.JwtService;
-import com.kodat.of.movie.user.UserRepository;
+import com.kodat.of.movie.user.entity.UserRepository;
 import com.kodat.of.movie.user.entity.CustomUserDetails;
 import com.kodat.of.movie.user.entity.User;
 import com.kodat.of.movie.user.role.RoleRepository;

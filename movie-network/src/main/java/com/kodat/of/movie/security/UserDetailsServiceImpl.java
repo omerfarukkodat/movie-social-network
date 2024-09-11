@@ -1,6 +1,6 @@
 package com.kodat.of.movie.security;
 
-import com.kodat.of.movie.user.UserRepository;
+import com.kodat.of.movie.user.entity.UserRepository;
 import com.kodat.of.movie.user.entity.CustomUserDetails;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.userdetails.UserDetails;

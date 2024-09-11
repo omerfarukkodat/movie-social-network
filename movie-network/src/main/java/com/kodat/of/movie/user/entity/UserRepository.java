@@ -1,6 +1,5 @@
-package com.kodat.of.movie.user;
+package com.kodat.of.movie.user.entity;
 
-import com.kodat.of.movie.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

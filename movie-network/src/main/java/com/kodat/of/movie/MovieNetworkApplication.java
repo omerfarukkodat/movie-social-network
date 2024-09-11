@@ -1,9 +1,7 @@
 package com.kodat.of.movie;
 
-import com.kodat.of.movie.user.UserRepository;
 import com.kodat.of.movie.user.role.Role;
 import com.kodat.of.movie.user.role.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
