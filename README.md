@@ -29,7 +29,7 @@ Movie Social Network is an application for managing movies, allowing users to bo
 1. Clone the project:
     ```bash
     git clone https://github.com/omerfarukkodat/movie-social-network.git
-    cd movie-network
+    cd movie-social-network
     ```
 
 2. Make sure you have Docker installed, and run MailDev for email service:
